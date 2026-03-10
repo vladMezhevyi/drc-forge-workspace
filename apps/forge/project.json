@@ -2,7 +2,7 @@
   "name": "forge",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
-  "prefix": "app",
+  "prefix": "drc",
   "sourceRoot": "apps/forge/src",
   "tags": [],
   "targets": {
@@ -13,14 +13,14 @@
         "outputPath": "dist/apps/forge",
         "browser": "apps/forge/src/main.ts",
         "tsConfig": "apps/forge/tsconfig.app.json",
-        "inlineStyleLanguage": "scss",
+        "inlineStyleLanguage": "css",
         "assets": [
           {
             "glob": "**/*",
             "input": "apps/forge/public"
           }
         ],
-        "styles": ["apps/forge/src/styles.scss"]
+        "styles": ["apps/forge/src/styles.css"]
       },
       "configurations": {
         "production": {
