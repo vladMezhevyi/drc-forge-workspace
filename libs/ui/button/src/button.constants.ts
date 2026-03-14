@@ -1,7 +1,10 @@
 import { ButtonSeverity, ButtonSize, ButtonVariant } from './button.types';
 
-export const BUTTON_BASE_CLASSES =
-  'inline-flex items-center justify-center flex-nowrap gap-2 cursor-pointer rounded-xs transition-[color,background-color,border-color,box-shadow]';
+export const BUTTON_BASE =
+  'inline-flex items-center justify-center flex-nowrap gap-2 rounded-xs transition-[color,background-color,border-color,box-shadow]';
+
+export const BUTTON_DISABLED =
+  'opacity-50 cursor-not-allowed pointer-events-none';
 
 export const BUTTON_SIZE_MAP: Record<ButtonSize, string> = {
   xs: 'text-xs py-1 px-2',
