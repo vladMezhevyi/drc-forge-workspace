@@ -13,4 +13,8 @@
   body {
     background-color: var(--color-surface-50);
   }
+
+  body {
+    color: var(--color-neutral-600);
+  }
 }
