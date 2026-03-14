@@ -8,4 +8,4 @@ export type ButtonSeverity =
 
 export type ButtonVariant = 'filled' | 'outlined' | 'text' | 'icon';
 
-export type ButtonSize = 'sm' | 'md' | 'lg';
+export type ButtonSize = 'xs' | 'sm' | 'md' | 'lg';

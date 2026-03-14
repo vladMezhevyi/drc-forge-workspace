@@ -7,10 +7,13 @@ import {
   input,
 } from '@angular/core';
 import { ButtonSeverity, ButtonSize, ButtonVariant } from './button.types';
+import { BUTTON_BASE_CLASSES, BUTTON_SIZE_MAP } from './button.constants';
 
 @Directive({
   selector: 'button[drcButton], a[drcButton]',
   host: {
+    type: 'button',
+    '[class]': 'classes()',
     '[attr.disabled]': 'isBtnDisabled()',
     '[attr.aria-disabled]': 'isLinkDisabled()',
   },
@@ -18,7 +21,7 @@ import { ButtonSeverity, ButtonSize, ButtonVariant } from './button.types';
 export class DrcButton {
   private readonly hostEl = inject<ElementRef<HTMLElement>>(ElementRef);
 
-  readonly variant = input<ButtonVariant>('filled', { alias: 'drcButton' });
+  readonly variant = input<ButtonVariant>('filled');
   readonly severity = input<ButtonSeverity>('primary');
   readonly size = input<ButtonSize>('md');
   readonly disabled = input<boolean, unknown>(false, {
@@ -34,5 +37,9 @@ export class DrcButton {
 
   protected readonly isLinkDisabled = computed<string | null>(() =>
     this.disabled() && this.isLink ? 'true' : null,
+  );
+
+  protected readonly classes = computed<string>(() =>
+    [BUTTON_BASE_CLASSES, BUTTON_SIZE_MAP[this.size()]].join(' '),
   );
 }
