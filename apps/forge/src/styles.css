@@ -1,4 +1,4 @@
 @import 'tailwindcss' source('./app');
-@import '../../../libs/ui/src/styles/tokens.css';
+@import '../../../libs/ui/src/styles/index.css';
 
 @source "../../../libs/ui/src/";

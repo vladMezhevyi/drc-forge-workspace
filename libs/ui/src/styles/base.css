@@ -1,0 +1,17 @@
+@layer base {
+  *:focus {
+    outline-color: transparent;
+    outline-style: solid;
+  }
+
+  *:focus-visible {
+    box-shadow:
+      0 0 0 var(--focus-ring-offset) var(--focus-ring-offset-color),
+      0 0 0 var(--focus-ring-width) var(--focus-ring-color);
+  }
+
+  html,
+  body {
+    background-color: var(--color-surface-50);
+  }
+}
