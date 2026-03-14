@@ -7,7 +7,11 @@ import {
   input,
 } from '@angular/core';
 import { ButtonSeverity, ButtonSize, ButtonVariant } from './button.types';
-import { BUTTON_BASE_CLASSES, BUTTON_SIZE_MAP } from './button.constants';
+import {
+  BUTTON_BASE_CLASSES,
+  BUTTON_SIZE_MAP,
+  BUTTON_VARIANT_MAP,
+} from './button.constants';
 
 @Directive({
   selector: 'button[drcButton], a[drcButton]',
@@ -40,6 +44,10 @@ export class DrcButton {
   );
 
   protected readonly classes = computed<string>(() =>
-    [BUTTON_BASE_CLASSES, BUTTON_SIZE_MAP[this.size()]].join(' '),
+    [
+      BUTTON_BASE_CLASSES,
+      BUTTON_SIZE_MAP[this.size()],
+      BUTTON_VARIANT_MAP[this.severity()][this.variant()],
+    ].join(' '),
   );
 }
