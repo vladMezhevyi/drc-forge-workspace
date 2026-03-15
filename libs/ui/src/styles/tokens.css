@@ -112,4 +112,9 @@
   --focus-ring-width: 4px;
   --focus-ring-offset: 2px;
   --focus-ring-offset-color: var(--color-surface-50);
+
+  --icon-fill: 0;
+  --icon-weight: 400;
+  --icon-grade: 0;
+  --icon-size-default: 1.5rem; /* 24px */
 }
