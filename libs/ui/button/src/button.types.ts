@@ -6,6 +6,11 @@ export type ButtonSeverity =
   | 'warn'
   | 'danger';
 
-export type ButtonVariant = 'filled' | 'outlined' | 'text' | 'icon';
+export type ButtonVariant =
+  | 'elevated'
+  | 'filled'
+  | 'tonal'
+  | 'outlined'
+  | 'text';
 
-export type ButtonSize = 'sm' | 'md' | 'lg';
+export type ButtonSize = 'xs' | 'sm' | 'md' | 'lg';

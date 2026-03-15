@@ -16,7 +16,8 @@
     "baseUrl": ".",
     "paths": {
       "@drc/ui": ["libs/ui/src/index.ts"],
-      "@drc/ui/button": ["libs/ui/button/src/index.ts"]
+      "@drc/ui/button": ["libs/ui/button/src/index.ts"],
+      "@drc/ui/icon": ["libs/ui/icon/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
