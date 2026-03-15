@@ -7,10 +7,10 @@ export const BUTTON_DISABLED =
   'opacity-50 cursor-not-allowed pointer-events-none';
 
 export const BUTTON_SIZE_MAP: Record<ButtonSize, string> = {
-  xs: 'text-xs py-1 px-2',
-  sm: 'text-sm py-1.5 px-3',
-  md: 'text-base py-2 px-4',
-  lg: 'text-lg py-2.5 px-5',
+  xs: 'text-xs py-1 px-2 [--icon-size:0.875rem]',
+  sm: 'text-sm py-1.5 px-3 [--icon-size:1rem]',
+  md: 'text-base py-2 px-4 [--icon-size:1.25rem]',
+  lg: 'text-lg py-2.5 px-5 [--icon-size:1.5rem]',
 };
 
 const OUTLINED_BASE = 'bg-transparent border';

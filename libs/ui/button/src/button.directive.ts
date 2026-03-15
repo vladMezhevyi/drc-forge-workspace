@@ -21,6 +21,7 @@ import {
     '[class]': 'classes()',
     '[attr.disabled]': 'isBtnDisabled()',
     '[attr.aria-disabled]': 'isLinkDisabled()',
+    '[attr.aria-busy]': 'isBusy()',
   },
 })
 export class DrcButton {
@@ -32,16 +33,27 @@ export class DrcButton {
   readonly disabled = input<boolean, unknown>(false, {
     transform: booleanAttribute,
   });
+  readonly loading = input<boolean, unknown>(false, {
+    transform: booleanAttribute,
+  });
 
   protected readonly isLink =
     this.hostEl.nativeElement.tagName.toLowerCase() === 'a';
 
+  protected readonly isDisabled = computed<boolean>(
+    () => this.disabled() || this.loading(),
+  );
+
   protected readonly isBtnDisabled = computed<boolean | null>(
-    () => (this.disabled() && !this.isLink) || null,
+    () => (this.isDisabled() && !this.isLink) || null,
   );
 
   protected readonly isLinkDisabled = computed<string | null>(() =>
-    this.disabled() && this.isLink ? 'true' : null,
+    this.isDisabled() && this.isLink ? 'true' : null,
+  );
+
+  protected readonly isBusy = computed<string | null>(() =>
+    this.loading() ? 'true' : null,
   );
 
   protected readonly classes = computed<string>(() =>
@@ -49,7 +61,7 @@ export class DrcButton {
       BUTTON_BASE,
       BUTTON_SIZE_MAP[this.size()],
       BUTTON_VARIANT_MAP[this.severity()][this.variant()],
-      this.disabled() ? BUTTON_DISABLED : 'cursor-pointer',
+      this.isDisabled() ? BUTTON_DISABLED : 'cursor-pointer',
     ].join(' '),
   );
 }
