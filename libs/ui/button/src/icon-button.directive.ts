@@ -1,4 +1,4 @@
-import { afterEveryRender, Directive, isDevMode } from '@angular/core';
+import { afterNextRender, Directive, isDevMode } from '@angular/core';
 import { ButtonBase } from './button';
 import { ButtonSize } from './button.types';
 import { ICON_BUTTON_SIZE_MAP } from './button.constants';
@@ -20,8 +20,8 @@ export class DrcIconButton extends ButtonBase {
   constructor() {
     super();
 
-    // Verify that icon button has aria-label attribute
-    afterEveryRender({ read: () => this.verifyAriaLabel() });
+    // Verify that icon button has aria-label attribute on component initialization
+    afterNextRender({ read: () => this.verifyAriaLabel() });
   }
 
   private verifyAriaLabel(): void {
