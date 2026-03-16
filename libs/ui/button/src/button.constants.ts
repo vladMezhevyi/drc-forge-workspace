@@ -13,6 +13,13 @@ export const BUTTON_SIZE_MAP: Record<ButtonSize, string> = {
   lg: 'text-lg py-2.5 px-5 [--icon-size:1.5rem]',
 };
 
+export const ICON_BUTTON_SIZE_MAP: Record<ButtonSize, string> = {
+  xs: 'text-xs p-1.25 [--icon-size:0.875rem]',
+  sm: 'text-sm p-2 [--icon-size:1rem]',
+  md: 'text-base p-2.5 [--icon-size:1.25rem]',
+  lg: 'text-lg p-3 [--icon-size:1.5rem]',
+};
+
 const OUTLINED_BASE = 'bg-transparent border';
 const ELEVATED_BASE = 'bg-base shadow-sm hover:shadow-md active:shadow-xs';
 const TEXT_BASE = 'bg-transparent';
