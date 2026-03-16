@@ -4,7 +4,7 @@
   "projectType": "application",
   "prefix": "drc",
   "sourceRoot": "apps/forge/src",
-  "tags": [],
+  "tags": ["scope:forge", "type:app"],
   "targets": {
     "build": {
       "executor": "@angular/build:application",

@@ -3,7 +3,7 @@ import { validate } from '../../middleware/validate.js';
 import {
   SearchRepositoriesQueryParamsSchema,
   SearchUsersQueryParamsSchema,
-} from './search.schema.js';
+} from '@drc/shared/contracts';
 import { searchController } from './search.controller.js';
 
 export const searchRouter = Router();

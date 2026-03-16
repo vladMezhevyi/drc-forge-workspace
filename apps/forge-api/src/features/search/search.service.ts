@@ -4,7 +4,7 @@ import type {
   SearchRepositoriesResponse,
   SearchUsersQueryParams,
   SearchUsersResponse,
-} from './search.schema.js';
+} from '@drc/shared/contracts';
 
 class SearchService {
   private readonly errors: Record<number, string> = {
@@ -15,12 +15,22 @@ class SearchService {
   async searchRepositories(
     queryParams: SearchRepositoriesQueryParams,
   ): Promise<SearchRepositoriesResponse> {
-    const response = await githubRequest('GET /search/repositories', queryParams, this.errors);
+    const response = await githubRequest(
+      'GET /search/repositories',
+      queryParams,
+      this.errors,
+    );
     return response.data;
   }
 
-  async searchUsers(queryParams: SearchUsersQueryParams): Promise<SearchUsersResponse> {
-    const response = await githubRequest('GET /search/users', queryParams, this.errors);
+  async searchUsers(
+    queryParams: SearchUsersQueryParams,
+  ): Promise<SearchUsersResponse> {
+    const response = await githubRequest(
+      'GET /search/users',
+      queryParams,
+      this.errors,
+    );
     return response.data;
   }
 }

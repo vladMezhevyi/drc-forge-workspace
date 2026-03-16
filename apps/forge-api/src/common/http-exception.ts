@@ -5,7 +5,7 @@ export class HttpException extends Error {
     public readonly statusCode: HttpStatusCode,
     public readonly message: string,
     public readonly errors?: unknown[],
-    public readonly isOperational: boolean = true, // false - unexpected bug, true = expected error
+    public readonly isOperational = true, // false - unexpected bug, true = expected error
   ) {
     super(message);
 

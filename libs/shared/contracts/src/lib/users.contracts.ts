@@ -1,5 +1,5 @@
 import z from 'zod';
-import type { DeepCamelCase } from '../../utils/case-transform/case-transform.types.js';
+import type { DeepCamelCase } from '@drc/shared/models';
 import type { Endpoints } from '@octokit/types';
 
 export const GetUserParamsSchema = z.object({
