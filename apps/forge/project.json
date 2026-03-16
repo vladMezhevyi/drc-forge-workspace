@@ -4,11 +4,16 @@
   "projectType": "application",
   "prefix": "drc",
   "sourceRoot": "apps/forge/src",
-  "tags": ["scope:forge", "type:app"],
+  "tags": [
+    "scope:forge",
+    "type:app"
+  ],
   "targets": {
     "build": {
       "executor": "@angular/build:application",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/apps/forge",
         "browser": "apps/forge/src/main.ts",
@@ -20,7 +25,9 @@
             "input": "apps/forge/public"
           }
         ],
-        "styles": ["apps/forge/src/styles.css"]
+        "styles": [
+          "apps/forge/src/styles.css"
+        ]
       },
       "configurations": {
         "production": {
@@ -41,7 +48,13 @@
         "development": {
           "optimization": false,
           "extractLicenses": false,
-          "sourceMap": true
+          "sourceMap": true,
+          "fileReplacements": [
+            {
+              "replace": "apps/forge/src/environments/environment.ts",
+              "with": "apps/forge/src/environments/environment.development.ts"
+            }
+          ]
         }
       },
       "defaultConfiguration": "production"
