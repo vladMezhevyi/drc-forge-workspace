@@ -11,6 +11,7 @@ import { ButtonBase } from './button';
     '[attr.disabled]': 'isBtnDisabled()',
     '[attr.aria-disabled]': 'isLinkDisabled()',
     '[attr.aria-busy]': 'isBusy()',
+    '[attr.tabindex]': 'isLinkDisabled() ? -1 : null',
   },
 })
 export class DrcButton extends ButtonBase {
