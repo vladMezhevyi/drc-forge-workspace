@@ -11,10 +11,10 @@
 
   html,
   body {
-    background-color: var(--color-surface-50);
+    background-color: var(--color-base);
   }
 
   body {
-    color: var(--color-neutral-600);
+    color: var(--color-black);
   }
 }
