@@ -1,6 +1,6 @@
 import type { Endpoints } from '@octokit/types';
-import type { DeepCamelCase } from '../../utils/case-transform/case-transform.types.js';
 import z from 'zod';
+import { DeepCamelCase } from '@drc/shared/models';
 
 // Common Schemas
 export const BaseSearchQueryParamsSchema = z.object({
@@ -11,11 +11,16 @@ export const BaseSearchQueryParamsSchema = z.object({
 });
 
 // Search Repositories
-export const SearchRepositoriesQueryParamsSchema = BaseSearchQueryParamsSchema.extend({
-  sort: z.enum(['stars', 'forks', 'help-wanted-issues', 'updated']).optional(),
-});
+export const SearchRepositoriesQueryParamsSchema =
+  BaseSearchQueryParamsSchema.extend({
+    sort: z
+      .enum(['stars', 'forks', 'help-wanted-issues', 'updated'])
+      .optional(),
+  });
 
-export type SearchRepositoriesQueryParams = z.infer<typeof SearchRepositoriesQueryParamsSchema>;
+export type SearchRepositoriesQueryParams = z.infer<
+  typeof SearchRepositoriesQueryParamsSchema
+>;
 
 export type SearchRepositoriesResponse = DeepCamelCase<
   Endpoints['GET /search/repositories']['response']['data']
@@ -26,6 +31,10 @@ export const SearchUsersQueryParamsSchema = BaseSearchQueryParamsSchema.extend({
   sort: z.enum(['followers', 'repositories', 'joined']).optional(),
 });
 
-export type SearchUsersQueryParams = z.infer<typeof SearchUsersQueryParamsSchema>;
+export type SearchUsersQueryParams = z.infer<
+  typeof SearchUsersQueryParamsSchema
+>;
 
-export type SearchUsersResponse = DeepCamelCase<Endpoints['GET /search/users']['response']['data']>;
+export type SearchUsersResponse = DeepCamelCase<
+  Endpoints['GET /search/users']['response']['data']
+>;

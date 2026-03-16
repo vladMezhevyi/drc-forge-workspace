@@ -1,5 +1,5 @@
 import { githubRequest } from '../../lib/github/github-request.js';
-import type { GetUserParams, GetUserResponse } from './users.schema.js';
+import type { GetUserParams, GetUserResponse } from '@drc/shared/contracts';
 
 class UsersService {
   async getUser(queryParams: GetUserParams): Promise<GetUserResponse> {

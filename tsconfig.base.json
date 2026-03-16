@@ -17,7 +17,10 @@
     "paths": {
       "@drc/ui": ["libs/ui/src/index.ts"],
       "@drc/ui/button": ["libs/ui/button/src/index.ts"],
-      "@drc/ui/icon": ["libs/ui/icon/src/index.ts"]
+      "@drc/ui/icon": ["libs/ui/icon/src/index.ts"],
+      "@drc/ui/input": ["libs/ui/input/src/index.ts"],
+      "@drc/shared/models": ["libs/shared/models/src/index.ts"],
+      "@drc/shared/contracts": ["libs/shared/contracts/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

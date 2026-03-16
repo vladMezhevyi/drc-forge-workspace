@@ -3,8 +3,8 @@ import { RequestError } from '@octokit/request-error';
 import { octokit } from './github-client.js';
 import { HttpException } from '../../common/http-exception.js';
 import { HttpStatusCode } from '../../common/http-status-code.js';
-import { deepCamelCase, deepSnakeCase } from '../../utils/case-transform/index.js';
-import type { DeepCamelCase } from '../../utils/case-transform/index.js';
+import { DeepCamelCase } from '@drc/shared/models';
+import { deepCamelCase, deepSnakeCase } from '../../utils/case-transform.js';
 
 type GitHubErrorMessages = Partial<Record<number, string>>;
 
@@ -32,7 +32,10 @@ export const githubRequest = async <E extends keyof Endpoints>(
 ): Promise<DeepCamelCase<Endpoints[E]['response']>> => {
   try {
     const parameters = params ? deepSnakeCase(params) : undefined;
-    const response = await octokit.request(endpoint, parameters as GitHubParams<E> | undefined);
+    const response = await octokit.request(
+      endpoint,
+      parameters as GitHubParams<E> | undefined,
+    );
     return deepCamelCase(response);
   } catch (error) {
     if (error instanceof RequestError) {
@@ -41,7 +44,10 @@ export const githubRequest = async <E extends keyof Endpoints>(
         throw new HttpException(error.status as HttpStatusCode, message);
       }
 
-      throw new HttpException(HttpStatusCode.INTERNAL_SERVER_ERROR, 'Something went wrong');
+      throw new HttpException(
+        HttpStatusCode.INTERNAL_SERVER_ERROR,
+        'Something went wrong',
+      );
     }
 
     throw error;
