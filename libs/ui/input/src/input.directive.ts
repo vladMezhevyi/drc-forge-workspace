@@ -3,7 +3,6 @@ import {
   computed,
   DestroyRef,
   Directive,
-  effect,
   inject,
   input,
   signal,
@@ -80,9 +79,6 @@ export class DrcInput {
 
   constructor() {
     this.setupStatusChanges();
-
-    effect(() => console.log('IsInvalid: ', this.isInvalid()));
-    effect(() => console.log('IsDisabled: ', this.isDisabled()));
   }
 
   protected onFocus(): void {
