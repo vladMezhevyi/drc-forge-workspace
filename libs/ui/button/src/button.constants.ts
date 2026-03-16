@@ -14,8 +14,7 @@ export const BUTTON_SIZE_MAP: Record<ButtonSize, string> = {
 };
 
 const OUTLINED_BASE = 'bg-transparent border';
-const ELEVATED_BASE =
-  'bg-surface-50 shadow-sm hover:shadow-md active:shadow-xs';
+const ELEVATED_BASE = 'bg-base shadow-sm hover:shadow-md active:shadow-xs';
 const TEXT_BASE = 'bg-transparent';
 
 export const BUTTON_VARIANT_MAP: Record<

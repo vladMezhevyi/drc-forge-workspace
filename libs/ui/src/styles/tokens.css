@@ -425,7 +425,7 @@
   --color-text: var(--color-black);
 
   /* Focus */
-  --focus-ring-color: var(--color-secondary-600);
+  --focus-ring-color: var(--color-primary-600);
   --focus-ring-width: 4px;
   --focus-ring-offset: 2px;
   --focus-ring-offset-color: var(--color-base);
