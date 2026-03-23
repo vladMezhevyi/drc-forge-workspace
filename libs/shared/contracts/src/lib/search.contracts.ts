@@ -10,6 +10,10 @@ export const BaseSearchQueryParamsSchema = z.object({
   page: z.coerce.number().positive().default(1).optional(),
 });
 
+export const SearchTypeSchema = z.enum(['repositories', 'users']);
+
+export type SearchType = z.infer<typeof SearchTypeSchema>;
+
 // Search Repositories
 export const SearchRepositoriesQueryParamsSchema =
   BaseSearchQueryParamsSchema.extend({
