@@ -81,43 +81,5 @@
         "spa": true
       }
     }
-  },
-  "schematics": {
-    "@schematics/angular:component": {
-      "style": "css",
-      "type": "component",
-      "changeDetection": "OnPush",
-      "skipTests": true
-    },
-    "@schematics/angular:directive": {
-      "type": "directive",
-      "flat": true,
-      "skipTests": true
-    },
-    "@schematics/angular:service": {
-      "type": "service",
-      "flat": true,
-      "skipTests": true
-    },
-    "@schematics/angular:guard": {
-      "typeSeparator": ".",
-      "flat": true,
-      "skipTests": true
-    },
-    "@schematics/angular:interceptor": {
-      "typeSeparator": ".",
-      "flat": true,
-      "skipTests": true
-    },
-    "@schematics/angular:pipe": {
-      "typeSeparator": ".",
-      "flat": true,
-      "skipTests": true
-    },
-    "@schematics/angular:resolver": {
-      "typeSeparator": ".",
-      "flat": true,
-      "skipTests": true
-    }
   }
 }
