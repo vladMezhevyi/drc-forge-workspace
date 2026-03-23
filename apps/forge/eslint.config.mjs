@@ -31,4 +31,17 @@ export default [
     // Override or add rules here
     rules: {},
   },
+  {
+    files: ['src/app/app.component.ts'],
+    rules: {
+      '@angular-eslint/component-selector': [
+        'error',
+        {
+          type: 'element',
+          prefix: 'app',
+          style: 'kebab-case',
+        },
+      ],
+    },
+  },
 ];
