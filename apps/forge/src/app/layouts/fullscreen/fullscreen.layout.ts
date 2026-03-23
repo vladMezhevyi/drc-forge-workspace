@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
-  selector: 'drc-search-page',
+  selector: 'drc-fullscreen',
   imports: [],
-  templateUrl: './search.page.html',
+  templateUrl: './fullscreen.layout.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SearchPage {}
+export class FullscreenLayout {}

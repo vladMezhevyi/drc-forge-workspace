@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
-  selector: 'drc-search',
-  imports: [],
+  selector: 'drc-search-layout',
+  imports: [RouterOutlet],
   templateUrl: './search.layout.html',
-  styleUrl: './search.layout.css',
 })
 export class SearchLayout {}

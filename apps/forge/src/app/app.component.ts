@@ -3,7 +3,7 @@ import { RouterOutlet } from '@angular/router';
 
 @Component({
   imports: [RouterOutlet],
-  selector: 'drc-root',
+  selector: 'app-root',
   template: `<router-outlet />`,
 })
 export class AppComponent {}

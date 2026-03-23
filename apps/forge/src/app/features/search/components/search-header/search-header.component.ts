@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
-  selector: 'drc-search-page',
+  selector: 'drc-search-header',
   imports: [],
-  templateUrl: './search.page.html',
+  templateUrl: './search-header.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SearchPage {}
+export class SearchHeaderComponent {}
