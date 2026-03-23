@@ -4,16 +4,11 @@
   "projectType": "application",
   "prefix": "drc",
   "sourceRoot": "apps/forge/src",
-  "tags": [
-    "scope:forge",
-    "type:app"
-  ],
+  "tags": ["scope:forge", "type:app"],
   "targets": {
     "build": {
       "executor": "@angular/build:application",
-      "outputs": [
-        "{options.outputPath}"
-      ],
+      "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/apps/forge",
         "browser": "apps/forge/src/main.ts",
@@ -25,9 +20,7 @@
             "input": "apps/forge/public"
           }
         ],
-        "styles": [
-          "apps/forge/src/styles.css"
-        ]
+        "styles": ["apps/forge/src/styles.css"]
       },
       "configurations": {
         "production": {
@@ -87,6 +80,37 @@
         "staticFilePath": "dist/apps/forge/browser",
         "spa": true
       }
+    }
+  },
+  "schematics": {
+    "@schematics/angular:component": {
+      "style": "css",
+      "type": "component",
+      "changeDetection": "OnPush"
+    },
+    "@schematics/angular:directive": {
+      "type": "directive",
+      "flat": true
+    },
+    "@schematics/angular:service": {
+      "type": "service",
+      "flat": true
+    },
+    "@schematics/angular:guard": {
+      "typeSeparator": ".",
+      "flat": true
+    },
+    "@schematics/angular:interceptor": {
+      "typeSeparator": ".",
+      "flat": true
+    },
+    "@schematics/angular:pipe": {
+      "typeSeparator": ".",
+      "flat": true
+    },
+    "@schematics/angular:resolver": {
+      "typeSeparator": ".",
+      "flat": true
     }
   }
 }
