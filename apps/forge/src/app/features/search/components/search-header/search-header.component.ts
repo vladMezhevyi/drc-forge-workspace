@@ -1,30 +1,37 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  computed,
   DestroyRef,
   inject,
   viewChild,
 } from '@angular/core';
-import { DrcButton } from '@drc/ui/button';
 import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { CdkPortal, PortalModule } from '@angular/cdk/portal';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { filter } from 'rxjs';
 import { SearchPanelComponent } from '../search-panel/search-panel.component';
 import { A11yModule } from '@angular/cdk/a11y';
+import { DrcIcon } from '@drc/ui/icon';
+import { SearchStore } from '../../store/search.store';
 
 @Component({
   selector: 'drc-search-header',
-  imports: [PortalModule, A11yModule, DrcButton, SearchPanelComponent],
+  imports: [PortalModule, A11yModule, SearchPanelComponent, DrcIcon],
   templateUrl: './search-header.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SearchHeaderComponent {
   private readonly overlay = inject(Overlay);
   private readonly destroyRef = inject(DestroyRef);
+  private readonly store = inject(SearchStore);
 
   private readonly portal = viewChild.required(CdkPortal);
   private overlayRef: OverlayRef | null = null;
+
+  protected readonly placeholder = computed<string>(
+    () => this.store.query() || 'Search',
+  );
 
   protected show(): void {
     if (this.overlayRef) {

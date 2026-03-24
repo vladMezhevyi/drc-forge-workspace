@@ -1,17 +1,12 @@
 <header class="flex p-4">
-  <button type="button" drcButton (click)="show()">Search</button>
-  <!-- <input
-    #inputEl
-    type="text"
-    id="search-input"
-    placeholder="Search"
-    drcInput
-    [disabled]="isLoading()"
-    [(ngModel)]="query"
-    (focus)="onFocus()"
-    (blur)="onBlur()"
-    (keydown.enter)="onSearch('repositories')"
-  /> -->
+  <button
+    type="button"
+    class="flex items-center gap-2 w-full text-base py-2 px-4 h-10 rounded-xs border border-neutral-500 cursor-pointer"
+    (click)="show()"
+  >
+    <drc-icon>search</drc-icon>
+    {{ placeholder() }}
+  </button>
 </header>
 
 <ng-template cdkPortal>

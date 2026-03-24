@@ -7,4 +7,5 @@ export const INPUT_FOCUSED = 'border-primary-600 placeholder:text-primary-600';
 
 export const INPUT_INVALID = 'border-danger-600 placeholder:text-danger-600';
 
-export const INPUT_DISABLED = 'border-neutral-300 bg-neutral-100 text-neutral-600 placeholder:text-neutral-400 cursor-not-allowed';
+export const INPUT_DISABLED =
+  'border-neutral-300 bg-neutral-100 text-neutral-600 placeholder:text-neutral-400 cursor-not-allowed';

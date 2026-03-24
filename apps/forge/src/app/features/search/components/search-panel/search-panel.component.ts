@@ -25,7 +25,7 @@ interface SearchAction {
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     class:
-      'block w-full p-6 bg-primary-50 border border-primary-400 rounded-xs',
+      'block w-full p-6 bg-neutral-50 border border-primary-400 rounded-xs',
   },
 })
 export class SearchPanelComponent {
