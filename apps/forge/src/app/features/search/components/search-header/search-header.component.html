@@ -1,1 +1,23 @@
-<p>search-header works!</p>
+<header class="flex p-4">
+  <button type="button" drcButton (click)="show()">Search</button>
+  <!-- <input
+    #inputEl
+    type="text"
+    id="search-input"
+    placeholder="Search"
+    drcInput
+    [disabled]="isLoading()"
+    [(ngModel)]="query"
+    (focus)="onFocus()"
+    (blur)="onBlur()"
+    (keydown.enter)="onSearch('repositories')"
+  /> -->
+</header>
+
+<ng-template cdkPortal>
+  <drc-search-panel
+    cdkTrapFocus
+    cdkTrapFocusAutoCapture
+    (closeOverlay)="close()"
+  />
+</ng-template>

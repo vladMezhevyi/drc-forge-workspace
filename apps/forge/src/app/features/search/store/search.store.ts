@@ -1,7 +1,5 @@
 import { computed, inject } from '@angular/core';
 import {
-  GetRepositoryResponse,
-  GetUserResponse,
   SearchRepositoriesResponse,
   SearchType,
   SearchUsersResponse,
@@ -46,6 +44,14 @@ export const SearchStore = signalStore(
     hasError: computed(() => error() !== null),
   })),
   withMethods((store, api = inject(SearchApi)) => ({
+    search(query: string, type: SearchType): void {
+      const handlers: Record<SearchType, () => void> = {
+        repositories: () => this.searchRepositories(query),
+        users: () => this.searchUsers(query),
+      };
+
+      handlers[type]();
+    },
     searchRepositories: rxMethod<string>(
       pipe(
         tap((query) =>

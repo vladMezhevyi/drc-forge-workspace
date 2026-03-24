@@ -1,5 +1,5 @@
 export const INPUT_BASE =
-  'w-full text-base py-2 px-4 h-10 rounded-xs text-black border-1 transition-[color,background-color,border-color,box-shadow] [--icon-size:1.25rem]';
+  'w-full text-base py-2 px-4 h-10 rounded-xs border-1 transition-[color,background-color,border-color,box-shadow] [--icon-size:1.25rem]';
 
 export const INPUT_IDLE = 'border-neutral-500 placeholder:text-neutral-400';
 
