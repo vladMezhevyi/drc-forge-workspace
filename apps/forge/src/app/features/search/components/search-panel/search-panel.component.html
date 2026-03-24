@@ -5,7 +5,7 @@
   placeholder="Search"
   [disabled]="isLoading()"
   [(ngModel)]="query"
-  (keydown.enter)="onSearch('repositories')"
+  (keydown.enter)="onEnter($event)"
 />
 
 @if (query()) {

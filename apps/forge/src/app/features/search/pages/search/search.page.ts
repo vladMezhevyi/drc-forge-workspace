@@ -23,11 +23,6 @@ export class SearchPage {
     effect(() => {
       const query = this.q();
       const type = this.type() || 'repositories';
-      console.log({
-        query,
-        type,
-      });
-
       if (!query) return;
 
       this.store.search(query, type);

@@ -52,6 +52,11 @@ export class SearchPanelComponent {
     },
   ];
 
+  protected onEnter(e: Event): void {
+    e.preventDefault();
+    this.onSearch('repositories');
+  }
+
   protected onSearch(type: SearchType): void {
     const query = this.query();
     if (!query) return;
