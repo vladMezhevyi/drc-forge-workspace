@@ -69,6 +69,10 @@
     "@nx/angular:pipe": {
       "skipTests": true,
       "typeSeparator": "."
+    },
+    "@nx/angular:guard": {
+      "skipTests": true,
+      "typeSeparator": "."
     }
   },
   "plugins": [

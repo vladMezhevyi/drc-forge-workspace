@@ -7,11 +7,17 @@ import {
 } from '@angular/core';
 import { SearchStore } from '../../store/search.store';
 import { SearchType } from '@drc/shared/contracts';
+import { SearchListComponent } from '../../components/search-list/search-list.component';
+import { SearchPanelTriggerComponent } from '../../components/search-panel-trigger/search-panel-trigger.component';
 
 @Component({
   selector: 'drc-search-page',
+  imports: [SearchPanelTriggerComponent, SearchListComponent],
   templateUrl: './search.page.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  host: {
+    class: 'block p-4'
+  }
 })
 export class SearchPage {
   private readonly store = inject(SearchStore);

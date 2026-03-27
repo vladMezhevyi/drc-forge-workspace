@@ -1,12 +1,14 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { SearchHeaderComponent } from '../../components/search-header/search-header.component';
 import { SearchStore } from '../../store/search.store';
 
 @Component({
   selector: 'drc-search-layout',
-  imports: [RouterOutlet, SearchHeaderComponent],
+  imports: [RouterOutlet],
   providers: [SearchStore],
   templateUrl: './search.layout.html',
+  host: {
+    class: 'block container my-0 mx-auto',
+  },
 })
 export class SearchLayout {}

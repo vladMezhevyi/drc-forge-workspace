@@ -16,12 +16,12 @@ import { DrcIcon } from '@drc/ui/icon';
 import { SearchStore } from '../../store/search.store';
 
 @Component({
-  selector: 'drc-search-header',
+  selector: 'drc-search-panel-trigger',
   imports: [PortalModule, A11yModule, SearchPanelComponent, DrcIcon],
-  templateUrl: './search-header.component.html',
+  templateUrl: './search-panel-trigger.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SearchHeaderComponent {
+export class SearchPanelTriggerComponent {
   private readonly overlay = inject(Overlay);
   private readonly destroyRef = inject(DestroyRef);
   private readonly store = inject(SearchStore);
