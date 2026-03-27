@@ -1,17 +1,19 @@
 <input
+  #searchInput
   type="text"
   id="search-input"
   drcInput
   placeholder="Search"
   [disabled]="isLoading()"
   [(ngModel)]="query"
-  (keydown.enter)="onEnter($event)"
+  (keydown.enter)="onInputEnter($event)"
 />
 
 @if (query()) {
   <div class="mt-4 space-y-2">
     @for (action of actions; track $index) {
       <button
+        #searchBtn
         type="button"
         class="flex items-center gap-2 p-2 w-full cursor-pointer rounded-xs transition-colors hover:bg-primary-50 focus:bg-primary-50"
         aria-label="{{ action.label }} {{ query() }}"
