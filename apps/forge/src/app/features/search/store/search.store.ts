@@ -9,6 +9,7 @@ import {
   signalStore,
   withComputed,
   withMethods,
+  withProps,
   withState,
 } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
@@ -23,6 +24,7 @@ export interface SearchState {
   users: SearchUsersResponse['items'];
   isLoading: boolean;
   error: string | null;
+  lastExecuted: { query: string; type: SearchType } | null;
 }
 
 const initialState: SearchState = {
@@ -32,10 +34,12 @@ const initialState: SearchState = {
   users: [],
   isLoading: false,
   error: null,
+  lastExecuted: null,
 };
 
 export const SearchStore = signalStore(
   withState(initialState),
+  withProps(() => ({ api: inject(SearchApi) })),
   withComputed(({ activeType, repositories, users, isLoading, error }) => ({
     isEmpty: computed(() => {
       const array = activeType() === 'repositories' ? repositories() : users();
@@ -43,8 +47,12 @@ export const SearchStore = signalStore(
     }),
     hasError: computed(() => error() !== null),
   })),
-  withMethods((store, api = inject(SearchApi)) => ({
+  withMethods(({ api, ...store }) => ({
     search(query: string, type: SearchType): void {
+      if (this._isAlreadyExecuted(query, type)) return;
+
+      patchState(store, { lastExecuted: { query, type } });
+
       const handlers: Record<SearchType, () => void> = {
         repositories: () => this.searchRepositories(query),
         users: () => this.searchUsers(query),
@@ -71,7 +79,11 @@ export const SearchStore = signalStore(
               }),
             ),
             catchError((error: HttpErrorResponse) => {
-              patchState(store, { isLoading: false, error: error.message });
+              patchState(store, {
+                isLoading: false,
+                error: error.message,
+                lastExecuted: null,
+              });
               return EMPTY;
             }),
           ),
@@ -97,12 +109,20 @@ export const SearchStore = signalStore(
               }),
             ),
             catchError((error: HttpErrorResponse) => {
-              patchState(store, { isLoading: false, error: error.message });
+              patchState(store, {
+                isLoading: false,
+                error: error.message,
+                lastExecuted: null,
+              });
               return EMPTY;
             }),
           ),
         ),
       ),
     ),
+    _isAlreadyExecuted(query: string, type: SearchType): boolean {
+      const last = store.lastExecuted();
+      return last?.query === query && last?.type === type;
+    },
   })),
 );

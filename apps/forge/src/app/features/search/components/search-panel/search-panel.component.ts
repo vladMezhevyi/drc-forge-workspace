@@ -53,16 +53,30 @@ export class SearchPanelComponent {
   ];
 
   protected onEnter(e: Event): void {
-    e.preventDefault();
-    this.onSearch('repositories');
+    e.preventDefault(); // Prevent overlay reopening
+
+    const query = this.query();
+    const type = this.store.activeType();
+    if (!query) return;
+
+    this.search(query, type);
+    this.close();
   }
 
   protected onSearch(type: SearchType): void {
     const query = this.query();
     if (!query) return;
 
-    this.router.navigate(['/search'], { queryParams: { q: query, type } });
+    this.search(query, type);
     this.close();
+  }
+
+  private search(query: string, type: SearchType): void {
+    this.store.search(query, type);
+    this.router.navigate(['/search'], {
+      replaceUrl: true,
+      queryParams: { q: query, type },
+    });
   }
 
   protected close(): void {

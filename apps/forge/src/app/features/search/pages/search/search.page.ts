@@ -19,7 +19,15 @@ export class SearchPage {
   readonly q = input<string | undefined>(undefined);
   readonly type = input<SearchType | undefined>(undefined);
 
+  protected readonly isLoading = this.store.isLoading;
+  protected readonly isEmpty = this.store.isEmpty;
+  protected readonly repositories = this.store.repositories;
+  protected readonly users = this.store.users;
+  protected readonly activeType = this.store.activeType;
+  protected readonly error = this.store.error;
+
   constructor() {
+    // Search on URL changes
     effect(() => {
       const query = this.q();
       const type = this.type() || 'repositories';
