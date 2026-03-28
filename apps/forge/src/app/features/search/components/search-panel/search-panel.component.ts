@@ -11,11 +11,11 @@ import {
   viewChildren,
 } from '@angular/core';
 import { DrcInput } from '@drc/ui/input';
-import { SearchStore } from '../../store/search.store';
 import { SearchType } from '@drc/shared/contracts';
 import { FormsModule } from '@angular/forms';
 import { DrcIcon } from '@drc/ui/icon';
 import { Router } from '@angular/router';
+import { SearchContextStore } from '../../stores/search-context.store';
 
 interface SearchAction {
   label: string;
@@ -38,13 +38,14 @@ interface SearchAction {
   },
 })
 export class SearchPanelComponent {
-  private readonly store = inject(SearchStore);
   private readonly router = inject(Router);
   private readonly document = inject(DOCUMENT);
 
+  private readonly store = inject(SearchContextStore);
+
   readonly closeOverlay = output<void>();
 
-  protected readonly isLoading = this.store.isLoading;
+  protected readonly isLoading = computed<boolean>(() => false); // TODO: Listen to actual loading event
   protected readonly query = linkedSignal<string>(
     () => this.store.query() || '',
   );

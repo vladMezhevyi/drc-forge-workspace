@@ -13,7 +13,7 @@ import { filter } from 'rxjs';
 import { SearchPanelComponent } from '../search-panel/search-panel.component';
 import { A11yModule } from '@angular/cdk/a11y';
 import { DrcIcon } from '@drc/ui/icon';
-import { SearchStore } from '../../store/search.store';
+import { SearchContextStore } from '../../stores/search-context.store';
 
 @Component({
   selector: 'drc-search-panel-trigger',
@@ -24,7 +24,7 @@ import { SearchStore } from '../../store/search.store';
 export class SearchPanelTriggerComponent {
   private readonly overlay = inject(Overlay);
   private readonly destroyRef = inject(DestroyRef);
-  private readonly store = inject(SearchStore);
+  private readonly store = inject(SearchContextStore);
 
   private readonly portal = viewChild.required(CdkPortal);
   private overlayRef: OverlayRef | null = null;
