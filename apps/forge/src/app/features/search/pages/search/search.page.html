@@ -1,42 +1,14 @@
-<header>
+<header class="mb-4">
   <drc-search-panel-trigger />
 </header>
 
 <main>
-  <div>[Filters]</div>
-
-  <drc-search-list />
-</main>
-<!-- 
-<ul>
-  @if (isLoading()) {
-    <li>Loading...</li>
-  } @else if (error()) {
-    <li>{{ error() }}</li>
-  } @else if (isEmpty()) {
-    <li>Empty</li>
-  } @else {
-    @switch (activeType()) {
-      @case ('repositories') {
-        @for (repo of repositories(); track repo.id) {
-          <li>{{ repo.name }}</li>
-        }
-      }
-      @case ('users') {
-        @for (user of users(); track user.id) {
-          <li class="flex items-center gap-2">
-            @if (user.avatarUrl; as url) {
-              <img
-                class="max-w-8"
-                alt="{{ user.login }}'s avatar"
-                [src]="url"
-              />
-            }
-
-            <span>{{ user.login }}</span>
-          </li>
-        }
-      }
+  @switch (activeType()) {
+    @case ('repositories') {
+      <drc-repositories-view />
+    }
+    @case ('users') {
+      <drc-users-view />
     }
   }
-</ul> -->
+</main>

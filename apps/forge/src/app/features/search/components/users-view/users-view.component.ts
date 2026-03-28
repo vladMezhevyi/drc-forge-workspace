@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
-  selector: 'drc-search-list',
+  selector: 'drc-users-view',
   imports: [],
-  templateUrl: './search-list.component.html',
+  templateUrl: './users-view.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SearchListComponent {}
+export class UsersViewComponent {}
