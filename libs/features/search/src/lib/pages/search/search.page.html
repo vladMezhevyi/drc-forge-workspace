@@ -1,0 +1,14 @@
+<header class="mb-4">
+  <drc-search-panel-trigger />
+</header>
+
+<main>
+  @switch (activeType()) {
+    @case ('users') {
+      <drc-users-view />
+    }
+    @case ('repositories') {
+      <drc-repositories-view />
+    }
+  }
+</main>

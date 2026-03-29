@@ -32,6 +32,8 @@ export type SearchRepositoriesResponse = DeepCamelCase<
 
 export type SearchRepository = SearchRepositoriesResponse['items'][number];
 
+export type SearchRepositoryFilters = Omit<SearchRepositoriesQueryParams, 'q'>;
+
 // Search Users
 export const SearchUsersQueryParamsSchema = BaseSearchQueryParamsSchema.extend({
   sort: z.enum(['followers', 'repositories', 'joined']).optional(),
@@ -46,3 +48,5 @@ export type SearchUsersResponse = DeepCamelCase<
 >;
 
 export type SearchUser = SearchUsersResponse['items'][number];
+
+export type SearchUsersFilters = Omit<SearchUsersQueryParams, 'q'>;

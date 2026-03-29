@@ -9,6 +9,6 @@ export const appRoutes: Route[] = [
   {
     path: 'search',
     loadChildren: () =>
-      import('./features/search/search.routes').then((c) => c.SEARCH_ROUTES),
+      import('@drc/features/search').then((c) => c.SEARCH_ROUTES),
   },
 ];

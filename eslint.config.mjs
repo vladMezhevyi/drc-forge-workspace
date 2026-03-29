@@ -15,17 +15,57 @@ export default [
         {
           allow: [],
           depConstraints: [
+            // Scope Rules
             {
-              sourceTag: 'type:app',
+              sourceTag: 'scope:forge',
               onlyDependOnLibsWithTags: [
-                'type:models',
-                'type:ui',
-                'type:contracts',
+                'scope:shared',
+                'scope:ui',
+                'scope:search',
               ],
+            },
+            {
+              sourceTag: 'scope:forge-api',
+              onlyDependOnLibsWithTags: ['scope:shared'],
             },
             {
               sourceTag: 'scope:shared',
               onlyDependOnLibsWithTags: ['scope:shared'],
+            },
+            {
+              sourceTag: 'scope:ui',
+              onlyDependOnLibsWithTags: ['scope:shared'],
+            },
+            {
+              sourceTag: 'scope:search',
+              onlyDependOnLibsWithTags: [
+                'scope:search',
+                'scope:shared',
+                'scope:ui',
+              ],
+            },
+
+            // Type Rules
+            {
+              sourceTag: 'type:app',
+              onlyDependOnLibsWithTags: [
+                'type:feature',
+                'type:ui',
+                'type:contracts',
+                'type:models',
+              ],
+            },
+            {
+              sourceTag: 'type:feature',
+              onlyDependOnLibsWithTags: [
+                'type:ui',
+                'type:contracts',
+                'type:models',
+              ],
+            },
+            {
+              sourceTag: 'type:ui',
+              onlyDependOnLibsWithTags: ['type:contracts', 'type:models'],
             },
           ],
         },
