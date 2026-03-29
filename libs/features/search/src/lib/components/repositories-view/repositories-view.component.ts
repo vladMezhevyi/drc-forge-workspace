@@ -3,10 +3,11 @@ import { RepositoriesFiltersComponent } from '../repositories-filters/repositori
 import { RepositoriesStore } from '../../stores/repositories.store';
 import { SearchRepositoryFilters } from '@drc/shared/contracts';
 import { SearchFacade } from '../../facades/search.facade';
+import { RepositoryCardComponent } from '../repository-card/repository-card.component';
 
 @Component({
   selector: 'drc-repositories-view',
-  imports: [RepositoriesFiltersComponent],
+  imports: [RepositoriesFiltersComponent, RepositoryCardComponent],
   templateUrl: './repositories-view.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

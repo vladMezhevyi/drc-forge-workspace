@@ -1,0 +1,39 @@
+<article class="border border-primary-400 p-4 rounded-xs">
+  <div class="flex items-center flex-nowrap gap-3 mb-2">
+    @if (avatarUrl(); as url) {
+      <div
+        class="border border-neutral-400 rounded-sm overflow-hidden p-0.5 shrink-0"
+      >
+        <img class="h-8" [src]="url" [alt]="avatarAlt()" />
+      </div>
+    }
+
+    <h3 class="text-xl font-medium text-primary-600 truncate">
+      {{ repository().fullName }}
+    </h3>
+  </div>
+
+  @if (repository().description; as text) {
+    <p class="text-base mb-2">{{ text }}</p>
+  }
+
+  @if (repository().topics?.length) {
+    <ul class="flex flex-wrap gap-2 mb-2">
+      @for (topic of repository().topics; track topic) {
+        <li>
+          <a
+            class="py-1 px-2 bg-secondary-500/20 text-secondary-600 font-medium text-sm rounded-sm hover:bg-secondary-500/30 transition-colors"
+            target="_blank"
+            rel="noreferrer noopener"
+            [href]="getTopicUrl(topic)"
+            >{{ topic }}</a
+          >
+        </li>
+      }
+    </ul>
+  }
+
+  @if (repository().language; as language) {
+    <span class="text-primary-600">{{ language }}</span>
+  }
+</article>
