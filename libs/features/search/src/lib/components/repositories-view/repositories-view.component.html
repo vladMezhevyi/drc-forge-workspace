@@ -1,0 +1,22 @@
+<drc-repositories-filters class="block mb-2" />
+
+@if (isLoading()) {
+  <div>Loading...</div>
+} @else if (error()) {
+  <div>{{ error() }}</div>
+} @else {
+  <div>
+    <p class="text-2xl mb-2">
+      Total Count: <b>{{ totalCount() }}</b>
+    </p>
+
+    <ul class="space-y-2">
+      @for (repo of repositories(); track repo.id) {
+        <li class="bg-neutral-100 p-2">
+          <p class="text-xl font-medium">{{ repo.name }}</p>
+          <span>{{ repo.fullName }}</span>
+        </li>
+      }
+    </ul>
+  </div>
+}

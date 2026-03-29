@@ -12,7 +12,7 @@ export default [
         'error',
         {
           type: 'attribute',
-          prefix: 'app',
+          prefix: 'drc',
           style: 'camelCase',
         },
       ],
@@ -20,7 +20,7 @@ export default [
         'error',
         {
           type: 'element',
-          prefix: 'app',
+          prefix: 'drc',
           style: 'kebab-case',
         },
       ],
@@ -30,5 +30,18 @@ export default [
     files: ['**/*.html'],
     // Override or add rules here
     rules: {},
+  },
+  {
+    files: ['src/app/app.component.ts'],
+    rules: {
+      '@angular-eslint/component-selector': [
+        'error',
+        {
+          type: 'element',
+          prefix: 'app',
+          style: 'kebab-case',
+        },
+      ],
+    },
   },
 ];

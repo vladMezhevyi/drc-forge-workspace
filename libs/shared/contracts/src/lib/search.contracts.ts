@@ -10,6 +10,10 @@ export const BaseSearchQueryParamsSchema = z.object({
   page: z.coerce.number().positive().default(1).optional(),
 });
 
+export const SearchTypeSchema = z.enum(['repositories', 'users']);
+
+export type SearchType = z.infer<typeof SearchTypeSchema>;
+
 // Search Repositories
 export const SearchRepositoriesQueryParamsSchema =
   BaseSearchQueryParamsSchema.extend({
@@ -26,6 +30,10 @@ export type SearchRepositoriesResponse = DeepCamelCase<
   Endpoints['GET /search/repositories']['response']['data']
 >;
 
+export type SearchRepository = SearchRepositoriesResponse['items'][number];
+
+export type SearchRepositoryFilters = Omit<SearchRepositoriesQueryParams, 'q'>;
+
 // Search Users
 export const SearchUsersQueryParamsSchema = BaseSearchQueryParamsSchema.extend({
   sort: z.enum(['followers', 'repositories', 'joined']).optional(),
@@ -38,3 +46,7 @@ export type SearchUsersQueryParams = z.infer<
 export type SearchUsersResponse = DeepCamelCase<
   Endpoints['GET /search/users']['response']['data']
 >;
+
+export type SearchUser = SearchUsersResponse['items'][number];
+
+export type SearchUsersFilters = Omit<SearchUsersQueryParams, 'q'>;

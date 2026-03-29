@@ -1,0 +1,35 @@
+<input
+  #searchInput
+  type="text"
+  id="search-input"
+  drcInput
+  placeholder="Search"
+  [disabled]="isLoading()"
+  [(ngModel)]="query"
+  (keydown.enter)="onInputEnter($event)"
+/>
+
+@if (query()) {
+  <div class="mt-4 space-y-2">
+    @for (action of actions; track $index) {
+      <button
+        #searchBtn
+        type="button"
+        class="flex items-center gap-2 p-2 w-full cursor-pointer rounded-xs transition-colors hover:bg-primary-50 focus:bg-primary-50"
+        aria-label="{{ action.label }} {{ query() }}"
+        [disabled]="isLoading()"
+        (click)="onSearch(action.type)"
+      >
+        <drc-icon>{{ action.icon }}</drc-icon>
+        <span>
+          {{ action.label }}
+          <span class="font-medium text-primary-700">{{ query() }}</span>
+        </span>
+      </button>
+    }
+  </div>
+}
+
+<button type="button" class="cdk-visually-hidden" (click)="close()">
+  Close search overlay
+</button>

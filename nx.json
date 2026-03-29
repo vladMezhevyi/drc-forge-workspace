@@ -57,7 +57,22 @@
       "unitTestRunner": "none"
     },
     "@nx/angular:component": {
-      "style": "css"
+      "style": "none",
+      "type": "component",
+      "changeDetection": "OnPush",
+      "skipTests": true
+    },
+    "@nx/angular:directive": {
+      "skipTests": true,
+      "type": "directive"
+    },
+    "@nx/angular:pipe": {
+      "skipTests": true,
+      "typeSeparator": "."
+    },
+    "@nx/angular:guard": {
+      "skipTests": true,
+      "typeSeparator": "."
     }
   },
   "plugins": [

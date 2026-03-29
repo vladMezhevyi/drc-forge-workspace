@@ -420,7 +420,8 @@
   /* Common */
   --color-black: #15191e;
   --color-white: #fff;
-  --color-base: var(--color-neutral-50);
+  --color-base: var(--color-neutral-900);
+  --color-body: var(--color-neutral-50);
   --color-surface: var(--color-mist-200);
   --color-text: var(--color-black);
 
@@ -428,7 +429,7 @@
   --focus-ring-color: var(--color-primary-600);
   --focus-ring-width: 4px;
   --focus-ring-offset: 2px;
-  --focus-ring-offset-color: var(--color-base);
+  --focus-ring-offset-color: var(--color-body);
 
   /* Icons */
   --icon-fill: 0;
