@@ -1,17 +1,22 @@
 import {
+  afterRenderEffect,
   booleanAttribute,
   ChangeDetectionStrategy,
   Component,
   computed,
   contentChild,
+  DOCUMENT,
   effect,
+  ElementRef,
   forwardRef,
+  inject,
   input,
   linkedSignal,
   model,
   output,
   signal,
   TemplateRef,
+  viewChild,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { CdkConnectedOverlay, CdkOverlayOrigin } from '@angular/cdk/overlay';
@@ -45,6 +50,8 @@ type OnTouchedFn = () => void;
   },
 })
 export class DrcSelect<T = any> implements ControlValueAccessor {
+  private readonly document = inject(DOCUMENT);
+
   readonly suggestions = input<T[]>([]);
   readonly id = input<string>(`drc-select-${nextId++}`);
   readonly placeholder = input<string | undefined>(undefined);
@@ -56,11 +63,17 @@ export class DrcSelect<T = any> implements ControlValueAccessor {
   readonly forceSelection = input<boolean, unknown>(false, {
     transform: booleanAttribute,
   });
+  readonly maxHeight = input<string>('240px');
 
   readonly inputChange = output<string>();
 
+  private readonly containerRef =
+    viewChild.required<ElementRef<HTMLElement>>('containerRef');
+
   protected readonly itemTemplate =
     contentChild<TemplateRef<{ $implicit: T; item: T; index: number }>>('item');
+  protected readonly emptyTemplate =
+    contentChild<TemplateRef<unknown>>('empty');
 
   protected readonly panelId = computed<string>(() => `${this.id()}-panel`);
 
@@ -76,6 +89,8 @@ export class DrcSelect<T = any> implements ControlValueAccessor {
   protected readonly inputValue = linkedSignal<SelectValue, string>({
     source: this.value,
     computation: (next, prev) => {
+      console.log('[Computation]', { prev, next });
+
       if (prev?.source !== next) {
         const item = this.getItemByValue(next);
         return item === null ? '' : this.resolveLabel(item);
@@ -85,16 +100,27 @@ export class DrcSelect<T = any> implements ControlValueAccessor {
     },
   });
 
+  protected readonly activeIndex = signal<number>(-1);
+
+  protected readonly containerWidth = signal<number>(0);
+
   private onChange: OnChangeFn = () => {};
   private onTouched: OnTouchedFn = () => {};
 
   constructor() {
-    effect(() =>
-      console.log({
-        inputValue: this.inputValue(),
-        value: this.value(),
-      }),
-    );
+    effect(() => console.log('[Value]', this.value()));
+    effect(() => console.log('[Input Value]', this.inputValue()));
+
+    // Scroll item into view
+    afterRenderEffect({
+      read: () => {
+        const index = this.activeIndex();
+        if (index < 0 || !this.isOpen()) return;
+
+        const id = this.buildItemId(index);
+        this.document.getElementById(id)?.scrollIntoView({ block: 'nearest' });
+      },
+    });
   }
 
   // Input Events
@@ -119,33 +145,106 @@ export class DrcSelect<T = any> implements ControlValueAccessor {
     }
   }
 
+  protected onKeydown(e: KeyboardEvent): void {
+    const total = this.suggestions().length;
+
+    switch (e.key) {
+      case 'ArrowDown': {
+        e.preventDefault();
+
+        if (!this.isOpen()) {
+          this.isOpen.set(true);
+        }
+
+        this.activeIndex.update((prev) => (prev + 1) % total);
+        break;
+      }
+      case 'ArrowUp': {
+        e.preventDefault();
+
+        if (!this.isOpen()) {
+          this.isOpen.set(true);
+        }
+
+        this.activeIndex.update((prev) => (prev <= 0 ? total - 1 : prev - 1));
+        break;
+      }
+      case 'Enter': {
+        e.preventDefault();
+
+        if (!this.isOpen()) return;
+
+        const item = this.suggestions()[this.activeIndex()];
+        if (item) {
+          this.selectItem(item);
+        }
+
+        break;
+      }
+      case 'Home': {
+        if (this.isOpen()) {
+          e.preventDefault();
+          this.activeIndex.set(0);
+        }
+
+        break;
+      }
+      case 'End': {
+        if (this.isOpen()) {
+          e.preventDefault();
+          this.activeIndex.set(total - 1);
+        }
+
+        break;
+      }
+    }
+  }
+
   // Suggestion Item Methods
   protected selectItem(item: T): void {
     const value = this.resolveValue(item);
     this.setValue(value);
-    this.close(true);
+    this.close();
   }
 
   protected isSelected(item: T): boolean {
     return this.resolveValue(item) === this.value();
   }
 
+  protected isItemDisabled(item: T): boolean {
+    return (item as Record<string, unknown>)['disabled'] === true;
+  }
+
+  protected buildItemId(index: number): string {
+    return `${this.id()}-item-${index}`;
+  }
+
   // Overlay Methods
   protected open(): void {
     if (this.isDisabled()) return;
+
+    const width = this.containerRef().nativeElement.offsetWidth;
+    this.containerWidth.set(width);
+
+    this.activeIndex.set(-1);
     this.isOpen.set(true);
   }
 
-  protected close(selected = false): void {
-    if (!selected && this.forceSelection()) {
+  protected close(): void {
+    if (this.forceSelection()) {
       const inputValue = this.inputValue();
       const item = this.getItemByLabel(inputValue);
 
+      console.log('Item: ', item);
+
       if (!item) {
         this.setValue(null);
+        this.inputValue.set('');
       } else if (!this.isSelected(item)) {
         const value = this.resolveValue(item);
+        const label = this.resolveLabel(item);
         this.setValue(value);
+        this.inputValue.set(label);
       }
     }
 

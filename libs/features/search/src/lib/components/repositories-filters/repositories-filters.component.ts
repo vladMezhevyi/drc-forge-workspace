@@ -55,7 +55,7 @@ export class RepositoriesFiltersComponent {
     }
 
     const filteredCountries = this.countries.filter((country) =>
-      country.name.trim().startsWith(value.trim()),
+      country.name.trim().toLowerCase().startsWith(value.trim().toLowerCase()),
     );
     this.filteredCountries.set(filteredCountries);
   }

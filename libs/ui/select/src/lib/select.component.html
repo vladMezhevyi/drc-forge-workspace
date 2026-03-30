@@ -1,4 +1,4 @@
-<div>
+<div #containerRef>
   <input
     #inputRef
     cdkOverlayOrigin
@@ -16,6 +16,7 @@
     (focus)="onFocus()"
     (blur)="onBlur()"
     (input)="onInput($event)"
+    (keydown)="onKeydown($event)"
   />
 </div>
 
@@ -23,36 +24,52 @@
   cdkConnectedOverlay
   [cdkConnectedOverlayOrigin]="origin"
   [cdkConnectedOverlayOpen]="isOpen()"
+  [cdkConnectedOverlayWidth]="containerWidth()"
   (overlayOutsideClick)="close()"
   (detach)="onDetach()"
 >
   <ul
     role="listbox"
-    class="bg-body border border-neutral-400 p-1"
+    class="block w-full bg-body border border-neutral-400 py-2 shadow-md overflow-y-auto overflow-x-hidden"
     [id]="panelId()"
     [attr.labelledby]="id()"
+    [style.max-height]="maxHeight()"
   >
     @for (item of suggestions(); track resolveValue(item)) {
-      <li>
-        <button
-          type="button"
-          class="cursor-pointer bg-neutral-100 hover:bg-primary-100"
-          [class.bg-neutral-200]="isSelected(item)"
-          (click)="selectItem(item)"
-        >
-          @if (itemTemplate(); as template) {
-            <ng-container
-              [ngTemplateOutlet]="template"
-              [ngTemplateOutletContext]="{
-                item,
-                $implicit: item,
-                index: $index,
-              }"
-            />
-          } @else {
-            <span>{{ resolveLabel(item) }}</span>
-          }
-        </button>
+      <li
+        role="option"
+        tabindex="-1"
+        class="flex cursor-pointer select-none items-center px-3 py-2 text-sm hover:bg-primary-50"
+        [id]="buildItemId($index)"
+        [class.bg-neutral-200]="isSelected(item)"
+        [class.bg-neutral-300]="activeIndex() === $index"
+        [attr.aria-selected]="isSelected(item)"
+        [attr.aria-disabled]="isItemDisabled(item)"
+        (click)="selectItem(item)"
+        (keydown.enter)="selectItem(item)"
+      >
+        @if (itemTemplate(); as template) {
+          <ng-container
+            [ngTemplateOutlet]="template"
+            [ngTemplateOutletContext]="{
+              item,
+              $implicit: item,
+              index: $index,
+            }"
+          />
+        } @else {
+          <span class="inline-block w-full min-w-0 truncate">
+            {{ resolveLabel(item) }}
+          </span>
+        }
+      </li>
+    } @empty {
+      <li class="py-1 px-2">
+        @if (emptyTemplate(); as template) {
+          <ng-container [ngTemplateOutlet]="template" />
+        } @else {
+          <span>No results found</span>
+        }
       </li>
     }
   </ul>
