@@ -1,0 +1,86 @@
+/* 
+    --drc-[category]-[property]-[variant]-[state]-[mode]
+*/
+
+@layer drc.tokens {
+  :root {
+    /* Background */
+    --drc-color-bg-sunken: var(--drc-color-white);
+    --drc-color-bg: var(--drc-color-neutral-50);
+    --drc-color-bg-subtle: var(--drc-color-neutral-10);
+    --drc-color-bg-muted: var(--drc-color-neutral-200);
+
+    /* Foreground */
+    --drc-color-fg: var(--drc-color-black);
+    --drc-color-fg-subtle: var(--drc-color-neutral-700);
+    --drc-color-fg-muted: var(--drc-color-neutral-400);
+
+    /* Surface */
+    --drc-color-surface: var(--drc-color-neutral-200);
+    --drc-color-surface-raised: var(--drc-color-neutral-300);
+    --drc-color-surface-overlay: var(--drc-color-neutral-100);
+
+    /* Border */
+    --drc-color-border: var(--drc-color-neutral-200);
+    --drc-color-border-strong: var(--drc-color-neutral-400);
+    --drc-color-border-muted: var(--drc-color-neutral-200);
+
+    /* Primary */
+    --drc-color-primary: var(--drc-color-forest-500);
+    --drc-color-primary-hover: var(--drc-color-forest-600);
+    --drc-color-primary-active: var(--drc-color-forest-700);
+    --drc-color-primary-fg: var(--drc-color-forest-50);
+
+    --drc-color-primary-subtle: var(--drc-color-forest-100);
+    --drc-color-primary-subtle-hover: var(--drc-color-forest-200);
+    --drc-color-primary-subtle-active: var(--drc-color-forest-300);
+    --drc-color-primary-subtle-fg: var(--drc-color-forest-900);
+
+    /* Info */
+    --drc-color-info: var(--drc-color-blue-500);
+    --drc-color-info-hover: var(--drc-color-blue-600);
+    --drc-color-info-active: var(--drc-color-blue-700);
+    --drc-color-info-fg: var(--drc-color-blue-50);
+
+    --drc-color-info-subtle: var(--drc-color-blue-100);
+    --drc-color-info-subtle-hover: var(--drc-color-blue-200);
+    --drc-color-info-subtle-active: var(--drc-color-blue-300);
+    --drc-color-info-subtle-fg: var(--drc-color-blue-900);
+
+    /* Warn */
+    --drc-color-warn: var(--drc-color-amber-500);
+    --drc-color-warn-hover: var(--drc-color-amber-600);
+    --drc-color-warn-active: var(--drc-color-amber-700);
+    --drc-color-warn-fg: var(--drc-color-amber-50);
+
+    --drc-color-warn-subtle: var(--drc-color-amber-100);
+    --drc-color-warn-subtle-hover: var(--drc-color-amber-200);
+    --drc-color-warn-subtle-active: var(--drc-color-amber-300);
+    --drc-color-warn-subtle-fg: var(--drc-color-amber-900);
+
+    /* Danger */
+    --drc-color-danger: var(--drc-color-red-500);
+    --drc-color-danger-hover: var(--drc-color-red-600);
+    --drc-color-danger-active: var(--drc-color-red-700);
+    --drc-color-danger-fg: var(--drc-color-red-50);
+
+    --drc-color-danger-subtle: var(--drc-color-red-100);
+    --drc-color-danger-subtle-hover: var(--drc-color-red-200);
+    --drc-color-danger-subtle-active: var(--drc-color-red-300);
+    --drc-color-danger-subtle-fg: var(--drc-color-red-900);
+
+    /* Success */
+    --drc-color-success: var(--drc-color-green-500);
+    --drc-color-success-hover: var(--drc-color-green-600);
+    --drc-color-success-active: var(--drc-color-green-700);
+    --drc-color-success-fg: var(--drc-color-green-50);
+
+    --drc-color-success-subtle: var(--drc-color-green-100);
+    --drc-color-success-subtle-hover: var(--drc-color-green-200);
+    --drc-color-success-subtle-active: var(--drc-color-green-300);
+    --drc-color-success-subtle-fg: var(--drc-color-green-900);
+
+    /* Focus Ring */
+    --drc-color-ring: var(--drc-color-forest-500);
+  }
+}
