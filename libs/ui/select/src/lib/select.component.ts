@@ -16,6 +16,7 @@ import {
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { CdkConnectedOverlay, CdkOverlayOrigin } from '@angular/cdk/overlay';
 import { NgTemplateOutlet } from '@angular/common';
+import { DrcInput } from '@drc/ui/input';
 
 let nextId = 0;
 
@@ -29,7 +30,7 @@ type OnTouchedFn = () => void;
 
 @Component({
   selector: 'drc-select',
-  imports: [CdkOverlayOrigin, CdkConnectedOverlay, NgTemplateOutlet],
+  imports: [CdkOverlayOrigin, CdkConnectedOverlay, NgTemplateOutlet, DrcInput],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -58,7 +59,8 @@ export class DrcSelect<T = any> implements ControlValueAccessor {
 
   readonly inputChange = output<string>();
 
-  protected readonly itemTemplate = contentChild<TemplateRef<unknown>>('item');
+  protected readonly itemTemplate =
+    contentChild<TemplateRef<{ $implicit: T; item: T; index: number }>>('item');
 
   protected readonly panelId = computed<string>(() => `${this.id()}-panel`);
 
@@ -67,14 +69,16 @@ export class DrcSelect<T = any> implements ControlValueAccessor {
 
   readonly value = model<SelectValue>(null);
 
+  protected readonly selectedItem = computed<T | null>(() =>
+    this.getItemByValue(this.value()),
+  );
+
   protected readonly inputValue = linkedSignal<SelectValue, string>({
     source: this.value,
     computation: (next, prev) => {
       if (prev?.source !== next) {
-        const item = this.suggestions().find(
-          (item) => this.resolveValue(item) === next,
-        );
-        return item === undefined ? '' : this.resolveLabel(item);
+        const item = this.getItemByValue(next);
+        return item === null ? '' : this.resolveLabel(item);
       }
 
       return prev.value;
@@ -98,12 +102,6 @@ export class DrcSelect<T = any> implements ControlValueAccessor {
     this.open();
   }
 
-  protected onBlur(): void {
-    if (!this.isOpen()) {
-      this.onTouched();
-    }
-  }
-
   protected onInput(e: Event): void {
     const value = (e.target as HTMLInputElement).value;
 
@@ -115,11 +113,16 @@ export class DrcSelect<T = any> implements ControlValueAccessor {
     }
   }
 
+  protected onBlur(): void {
+    if (!this.isOpen()) {
+      this.onTouched();
+    }
+  }
+
   // Suggestion Item Methods
   protected selectItem(item: T): void {
     const value = this.resolveValue(item);
-    this.value.set(value);
-    this.onChange(value);
+    this.setValue(value);
     this.close(true);
   }
 
@@ -134,10 +137,25 @@ export class DrcSelect<T = any> implements ControlValueAccessor {
   }
 
   protected close(selected = false): void {
-    if (this.isDisabled()) return;
+    if (!selected && this.forceSelection()) {
+      const inputValue = this.inputValue();
+      const item = this.getItemByLabel(inputValue);
+
+      if (!item) {
+        this.setValue(null);
+      } else if (!this.isSelected(item)) {
+        const value = this.resolveValue(item);
+        this.setValue(value);
+      }
+    }
 
     this.isOpen.set(false);
     this.onTouched();
+  }
+
+  protected onDetach(): void {
+    if (!this.isOpen()) return;
+    this.close();
   }
 
   // Control Value Accessor Methods
@@ -158,6 +176,11 @@ export class DrcSelect<T = any> implements ControlValueAccessor {
   }
 
   // Helpers
+  private setValue(value: SelectValue): void {
+    this.value.set(value);
+    this.onChange(value);
+  }
+
   protected resolveValue(item: T): SelectValue {
     const accessor = this.optionValue();
     if (typeof accessor === 'function') return accessor(item);
@@ -170,5 +193,21 @@ export class DrcSelect<T = any> implements ControlValueAccessor {
 
     const label = (item as Record<string, unknown>)[accessor];
     return String(label);
+  }
+
+  private getItemByValue(value: SelectValue): T | null {
+    return (
+      this.suggestions().find((item) => this.resolveValue(item) === value) ??
+      null
+    );
+  }
+
+  private getItemByLabel(label: string): T | null {
+    return (
+      this.suggestions().find(
+        (item) =>
+          this.resolveLabel(item).toLowerCase() === label.trim().toLowerCase(),
+      ) ?? null
+    );
   }
 }

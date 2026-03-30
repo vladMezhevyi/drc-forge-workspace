@@ -3,5 +3,12 @@
   [(ngModel)]="countryIso"
   optionValue="iso"
   optionLabel="name"
+  forceSelection
   (inputChange)="onInput($event)"
-/>
+>
+  <ng-template #item let-item>
+    <span>
+      {{ item.name }} - <b>{{ item.iso }}</b>
+    </span>
+  </ng-template>
+</drc-select>

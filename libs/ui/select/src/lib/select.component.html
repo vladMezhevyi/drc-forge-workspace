@@ -5,6 +5,7 @@
     #origin="cdkOverlayOrigin"
     type="text"
     role="combobox"
+    drcInput
     aria-autocomplete="list"
     [attr.aria-expanded]="isOpen()"
     [attr.aria-controls]="panelId()"
@@ -22,6 +23,8 @@
   cdkConnectedOverlay
   [cdkConnectedOverlayOrigin]="origin"
   [cdkConnectedOverlayOpen]="isOpen()"
+  (overlayOutsideClick)="close()"
+  (detach)="onDetach()"
 >
   <ul
     role="listbox"
@@ -38,7 +41,14 @@
           (click)="selectItem(item)"
         >
           @if (itemTemplate(); as template) {
-            <ng-container [ngTemplateOutlet]="template" />
+            <ng-container
+              [ngTemplateOutlet]="template"
+              [ngTemplateOutletContext]="{
+                item,
+                $implicit: item,
+                index: $index,
+              }"
+            />
           } @else {
             <span>{{ resolveLabel(item) }}</span>
           }

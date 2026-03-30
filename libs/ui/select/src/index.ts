@@ -1,1 +1,1 @@
-export { DrcSelect } from './lib/select/select.component';
+export { DrcSelect } from './lib/select.component';
