@@ -1,2 +1,5 @@
+@layer drc.tokens, drc.components;
+
+@import './styles/normalize.css';
 @import './tokens/colors.css';
 @import './tokens/semantic.css';
