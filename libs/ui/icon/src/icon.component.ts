@@ -1,5 +1,6 @@
 import {
   booleanAttribute,
+  ChangeDetectionStrategy,
   Component,
   computed,
   inject,
@@ -34,6 +35,7 @@ const labelTransform = (value: unknown): string => {
       user-select: none;
     }
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DrcIcon {
   private readonly iconService = inject(IconService);

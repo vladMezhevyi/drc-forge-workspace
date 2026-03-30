@@ -21,7 +21,8 @@
       "@drc/ui/input": ["libs/ui/input/src/index.ts"],
       "@drc/shared/models": ["libs/shared/models/src/index.ts"],
       "@drc/shared/contracts": ["libs/shared/contracts/src/index.ts"],
-      "@drc/features/search": ["libs/features/search/src/index.ts"]
+      "@drc/features/search": ["libs/features/search/src/index.ts"],
+      "@drc/ui/select": ["libs/ui/select/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

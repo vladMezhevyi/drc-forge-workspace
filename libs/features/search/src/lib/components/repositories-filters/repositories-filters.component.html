@@ -1,1 +1,7 @@
-<p>repositories-filters works!</p>
+<drc-select
+  [suggestions]="filteredCountries()"
+  [(ngModel)]="countryIso"
+  optionValue="iso"
+  optionLabel="name"
+  (inputChange)="onInput($event)"
+/>

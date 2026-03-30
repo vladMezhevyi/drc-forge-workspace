@@ -1,0 +1,49 @@
+<div>
+  <input
+    #inputRef
+    cdkOverlayOrigin
+    #origin="cdkOverlayOrigin"
+    type="text"
+    role="combobox"
+    aria-autocomplete="list"
+    [attr.aria-expanded]="isOpen()"
+    [attr.aria-controls]="panelId()"
+    [attr.aria-labelledby]="id()"
+    [attr.placeholder]="placeholder()"
+    [disabled]="disabled()"
+    [value]="inputValue()"
+    (focus)="onFocus()"
+    (blur)="onBlur()"
+    (input)="onInput($event)"
+  />
+</div>
+
+<ng-template
+  cdkConnectedOverlay
+  [cdkConnectedOverlayOrigin]="origin"
+  [cdkConnectedOverlayOpen]="isOpen()"
+>
+  <ul
+    role="listbox"
+    class="bg-body border border-neutral-400 p-1"
+    [id]="panelId()"
+    [attr.labelledby]="id()"
+  >
+    @for (item of suggestions(); track resolveValue(item)) {
+      <li>
+        <button
+          type="button"
+          class="cursor-pointer bg-neutral-100 hover:bg-primary-100"
+          [class.bg-neutral-200]="isSelected(item)"
+          (click)="selectItem(item)"
+        >
+          @if (itemTemplate(); as template) {
+            <ng-container [ngTemplateOutlet]="template" />
+          } @else {
+            <span>{{ resolveLabel(item) }}</span>
+          }
+        </button>
+      </li>
+    }
+  </ul>
+</ng-template>
