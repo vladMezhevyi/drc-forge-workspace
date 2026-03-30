@@ -1,1 +1,17 @@
-<p>user-card works!</p>
+<article
+  class="border border-primary-400 p-4 rounded-xs flex items-center flex-nowrap gap-3"
+>
+  <div
+    class="border border-neutral-400 rounded-sm overflow-hidden p-0.5 shrink-0"
+  >
+    <img
+      class="h-8"
+      alt="{{ user().login }}'s avatar"
+      [src]="user().avatarUrl"
+    />
+  </div>
+
+  <h3 class="text-xl font-medium text-primary-600 truncate">
+    {{ user().login }}
+  </h3>
+</article>
